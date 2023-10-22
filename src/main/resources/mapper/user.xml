@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.firstapp.domain.user.UserDao">
+
+    <select id="findById"
+            resultType="site.metacoding.firstapp.domain.user.User">
+        SELECT * FROM user WHERE user_id = #{userId}
+    </select>
+
+    <select id="findAll"
+            resultType="site.metacoding.firstapp.domain.user.User">
+            SELECT * FROM user ORDER BY user_id DESC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO user(user_login_id, user_password, user_nickname)
+        VALUES(#{userLoginId}, #{userPassword}, #{userNickname})
+    </insert>
+
+
+    <update id="update">
+        UPDATE user
+        SET
+        user_login_id = #{userLoginId},
+        user_password = #{userPassword},
+        user_nickname = #{userNickname}
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM user WHERE user_id = #{userId}
+    </delete>
+
+
+</mapper>

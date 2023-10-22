@@ -21,7 +21,7 @@ public class MyBatisConfig {
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
-
+// Spring에서 알아서 세팅을 잡아준다. -- JDBC보다 더 세부적이고 디테일하게 세팅을 해준다.
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
         config.setMapUnderscoreToCamelCase(true);
         sessionFactory.setConfiguration(config);

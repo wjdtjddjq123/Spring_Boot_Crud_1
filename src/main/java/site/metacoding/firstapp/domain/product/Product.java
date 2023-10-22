@@ -10,7 +10,6 @@ public class Product {
     private String productName;
     private Integer productPrice;
     private Integer productQty;
-    private String productTag;
     private Integer userId;
     private Timestamp createdAt;
 }

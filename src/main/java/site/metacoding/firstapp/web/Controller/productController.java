@@ -1,24 +1,44 @@
 package site.metacoding.firstapp.web.Controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@RequiredArgsConstructor //
-@Controller // 페이지를 리턴하는 어노테이션
-public class productController {
-    @GetMapping("/")
-    // 인터넷 URL창에 기본적으로 적는 것
-    // /만 있으면 localhost창에 치면 아래 메서드가 호출된다.
-    // page이동 느낌 Post -> 데이터 이동 느낌.
-    public String hello(){
-        // 메서드명은 중복 되면 안 된다.
-        // String Type이면 String Type만 리턴 된다.
-        return "index";
-        // properties에서 server.servlet.context-path=/ 기본 경로를 설정한 것
-        // properties에서 spring.mvc.view.prefix=/WEB-INF/views/ 라는 코드로 경로를 단축
-        // properties에서 spring.mvc.view.suffix=.jsp로 확장자를 생략한 것
-        // jsp는 java server templete engine이다.
+import lombok.RequiredArgsConstructor;
+import site.metacoding.firstapp.domain.product.Product;
+import site.metacoding.firstapp.domain.user.User;
+import site.metacoding.firstapp.web.service.ProductService;
+import site.metacoding.firstapp.web.service.UserService;
 
+@RequiredArgsConstructor
+@Controller
+public class productController {
+
+    private final UserService userService;
+    private final ProductService productService;
+
+    @GetMapping("/")
+    public String hello() {
+        return "index";
+    }
+
+    @GetMapping("/user/test/xml")
+    public String testUser(Model model) {
+        System.err.println("디버그 컨트롤러");
+        Integer userId = 1;
+        User userPS = userService.findById(userId);
+        System.err.println("디버그 "+userPS.getUserLoginId());
+        model.addAttribute("userPS", userPS);
+        return "userXmlTest";
+    }
+
+    @GetMapping("/product/test/xml")
+    public String testProduct(Model model) {
+        System.err.println("디버그 컨트롤러");
+        Integer productId = 1;
+        Product productPS = productService.findById(productId);
+        System.err.println("디버그 "+productPS.getProductName());
+        model.addAttribute("productPS", productPS);
+        return "productXmlTest";
     }
 }
